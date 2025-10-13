@@ -1,0 +1,70 @@
+# 막대기 
+
+### [ 문제 정보 ]
+> **백준**: https://www.acmicpc.net/problem/11404
+> 
+> **난이도**: 2
+>
+> **유형**: #동적계획법
+
+
+### [ 문제 풀이 ]
+```C++
+#include <iostream>
+#include <queue>
+using namespace std;
+
+
+const int INF = 100000001;  
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n, m ;
+    cin >> n ;
+    cin >> m ;
+    vector<vector<int>> first(n+1, std::vector<int>(n+1, INF));
+
+
+    // 같은 곳으로 향하는 배열은 0으로
+    for (int i =1 ; i<= n ; i++) {
+        for (int j = 1 ; j<= n ; j++) {
+            if (i==j)
+                first[i][j] = 0;
+        }
+    }
+
+    // 입력받아서 초기 최단거리 설정
+    int a,b,c;
+    for (int i = 1 ; i<= m  ;i++) {
+        cin >> a >> b >> c ;
+        if (c < first[a][b])
+            first[a][b] = c ;
+    }
+
+    // 최단경로 업데이트
+    for (int k= 1; k<= n ;k++) {
+        for (int i =1 ; i<= n ; i++)
+            for (int j = 1 ; j<= n ; j++) {
+                first[i][j] = min(first[i][j], first[i][k] + first[k][j]);
+            }
+    }
+
+    for (int i =1 ; i<= n ; i++) {
+        for (int j =1 ; j<= n ; j++) {
+            if (first[i][j] == INF)
+                cout<< 0 << " ";
+            else
+                cout<< first[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+        
+```
+알고리즘(2-2) chapter.3 플로이드-워셜 최단거리
+
+
+---
+@www.codrive.co.kr
