@@ -1,0 +1,43 @@
+# 01타일
+
+### [ 문제 정보 ]
+> **백준**: https://www.acmicpc.net/problem/1904
+> 
+> **난이도**: 1
+>
+> **유형**: #DP
+
+
+### [ 문제 풀이 ]
+```C++
+#include <bits/stdc++.h>
+#include <cmath>
+using namespace std;
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int N;
+    cin >> N;
+    long long dp[N+1];
+    dp[1] = 1;
+    dp[2] = 2;
+    if (N == 1 || N==2) {
+
+    } else {
+        for ( int i = 3  ; i <= N; i++) {
+            dp[i] = (dp[i-1]+ dp[i-2])%15746;
+        }
+    }
+    cout << dp[N] << endl;
+
+
+}
+
+```
+easy
+
+
+---
+@www.codrive.co.kr
